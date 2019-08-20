@@ -14,17 +14,201 @@
 </head>
 
 <body>
-  
+  <!-- ! Nav -->
+  <nav class="blue darken-2">
+    <div class="container">
+      <div class="nav-wrapper">
+        <a href="index.html" class="brand-logo">Madmin</a>
+        <a href="#" class="button-collapse show-on-large right" data-activates="side-nav">
+          <i class="material-icons">menu</i>
+        </a>
+        <!-- ! main nav -->
+        <ul class="right hide-on-med-and-down">
+          <li class="active"><a href="index.html">Dashboard</a></li>
+          <li class=""><a href="posts.html">Posts</a></li>
+          <li class=""><a href="categories.html">Categories</a></li>
+          <li class=""><a href="comment.html">Comments</a></li>
+          <li class=""><a href="users.html">Users</a></li>
+        </ul>
+        <!-- ! side nav -->
+        <ul id="side-nav" class="side-nav">
+          <li>
+            <div class="user-view">
+              <div class="background"><img src="img/ocean.jpg">
+              </div>
+              <a href="#">
+                <img src="img/person1.jpg" class="circle">
+              </a>
+
+              <a href="">
+                <span class="name white-text">John Doe</span>
+              </a>
+              <a href="">
+                <span class="email white-text">johndoe@gmail.com</span>
+              </a>
+            </div>
+          </li>
+          <li>
+            <a href="index.html">
+              <i class="material-icons">dashboard</i> Dashboard
+            </a>
+          </li>
+          <li>
+            <a href="posts.html">
+              <i class="material-icons">mode_edit</i>
+              Posts
+            </a>
+          </li>
+          <li>
+            <a href="categories.html">
+              <i class="material-icons">categories</i>
+              Categories
+            </a>
+          </li>
+          <li>
+            <a href="comments.html">
+              <i class="material-icons">mode_comment</i>
+              Comments
+            </a>
+          </li>
+          <li>
+            <a href="users.html">
+              <i class="material-icons">person</i>
+              Users
+            </a>
+          </li>
+          <li class="subheader"> <a class="divider"></a></li>
+          <li >
+            <a>
+              <div class="subheader">Account Controls</div>
+            </a>
+          </li>
+          <li>
+            <a href="" class="waves-effect">Log Out</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- * END Nav -->
+
+  <!-- ! Section: Stats -->
+  <section class="section section-stats center">
+    <div class="row">
+      <div class="col s12 m6 l3">
+        <div class="card-panel blue lighten-1 white-text center">
+          <i class="material-icons medium">insert_emoticon</i>
+          <h5>Monthly Visitors</h5>
+          <h3 class="count">28300</h3>
+          <div class="progress grey lighten-1">
+            <div class="determinate white" style="width: 60%;"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col s12 m6 l3">
+        <div class="card-panel lighten-1 blue-text center">
+          <i class="material-icons medium">mode_edit</i>
+          <h5>Blog Post</h5>
+          <h3 class="count">105</h3>
+          <div class="progress grey lighten-1">
+            <div class="determinate blue" style="width: 25%;"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col s12 m6 l3">
+        <div class="card-panel blue lighten-1 white-text center">
+          <i class="material-icons medium">mode_comment</i>
+          <h5>Comments</h5>
+          <h3 class="count">1200</h3>
+          <div class="progress grey lighten-1">
+            <div class="determinate white" style="width: 40%;"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col s12 m6 l3">
+        <div class="card-panel lighten-1 center blue-text">
+          <i class="material-icons medium">supervisor_account</i>
+          <h5>User</h5>
+          <h3 class="count">350</h3>
+          <div class="progress grey lighten-1">
+            <div class="determinate blue" style="width: 80%;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- * END Section Stats  -->
+
+  <!-- ! Section Visitor -->
+  <section class="section section-visitor blue lighten-4">
+    <div class="row">
+      <div class="col s12 m6 l8">
+        <div class="card-panel">
+          <div id="chartContainer" style="height: 400px; width: 100%;">
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- * END Section Visitor -->
+
+
+  <!-- ! Preloader -->
+  <div class="loader preloader-wrapper big active">
+    <div class="spinner-layer spinner-blue-only">
+      <div class="circle-clipper left">
+        <div class="circle"></div>
+      </div><div class="gap-patch">
+        <div class="circle"></div>
+      </div><div class="circle-clipper right">
+        <div class="circle"></div>
+      </div>
+    </div>
+  </div>
+  <!-- END Preloader -->
 
   <!--Import jQuery before materialize.js-->
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <script type="text/javascript" src="js/materialize.min.js"></script>
+  <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+  <script type="text/javascript" src="js/chart.js"></script>
   <script>
-    $(document).ready(function () {
+    $('.section').hide();
+    setTimeout(function() {
+      $(document).ready(function() {
       //Init Side nav
+      $('.button-collapse').sideNav(
+        {
+          edge: 'right'
+        }
+      );
+      // Show Sections
+      $('.section').fadeIn();
+      // Hide Preloader
+      $('.loader').fadeOut();
       
-
-    });
+      // Animate Numbers
+      $('.count').each(function() {
+        $(this).prop('Counter', 0).animate(
+          {
+            Counter: $(this).text()
+          }, 
+          {
+            duration: 3000,
+            easing: 'swing',
+            step: function(now){
+              $(this).text(Math.ceil(now));
+            }
+          })
+        });
+      }); 
+      createChart();
+    }, 1000);
+    
   </script>
 </body>
 
